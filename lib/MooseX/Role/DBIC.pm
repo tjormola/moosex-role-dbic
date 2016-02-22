@@ -1,7 +1,7 @@
 package MooseX::Role::DBIC;
 # ABSTRACT: make your Moose class encapsulate one or more DBIC schemas
 
-use Class::MOP;
+use Class::Loader;
 use MooseX::Role::Parameterized;
 
 parameter 'schema_name' => qw(
@@ -103,7 +103,7 @@ role {
         my ( $self ) = @_;
 
         my $schema_class = $self->${\"${name}_class"}();
-        Class::MOP::load_class( $schema_class );
+        Class::Load::load_class( $schema_class );
 
         no strict 'refs';
 
